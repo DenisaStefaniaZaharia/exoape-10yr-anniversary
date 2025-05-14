@@ -1,0 +1,169 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    background:#0D0E13;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+/* Top Bar */
+.top-bar {
+    position: absolute;
+    width: 1320px;
+    height: 40px;
+    left: 60px;
+    top: 40px;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 24px;
+    pointer-events: auto;
+}
+
+.close-button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #888888;
+    border-radius: 50%;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+
+/* Horizontal Sections */
+#horizontal .content{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+}
+
+#horizontal{
+    display: flex;
+}
+
+.firstChapter{
+    position: absolute;
+    left: calc(50% - 965.94px / 2 + 151.97px);
+    top: calc(50% - 201px / 2 - 77.5px);
+    font-family: 'TWK Lausanne', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 100.43px;
+    line-height: 100px;
+    letter-spacing: -3.48716px;
+    color: #E0CCBB;
+}
+
+.description{
+    position: absolute;
+    width: 389px;
+    height: 121px;
+    left: calc(50% - 389px/2 - 127.5px);
+    top: 461px;
+    font-family: 'Lausanne';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18.125px;
+    line-height: 24px;
+    color: #E4E0DB;
+}
+
+
+.menu-chapter{
+    position: absolute;
+    width: 127px;
+    height: 11px;
+    left: calc(50% - 389px/2 - 127.5px);
+    top: 613px;
+}
+
+.menu-chapter a{
+    font-family: 'Lausanne';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 80%;
+    text-decoration-line: underline;
+    color:#E0CCBB;
+} 
+
+
+/* Bottom Bar */
+.bottom-bar {
+    position: fixed;
+    width: 1320px;
+    height: 49px;
+    top: 730px;
+    left: 60px;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sound-button {
+    border: 1px solid #E0CCBB;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-progress {
+    display: flex;
+    gap: 40px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid #E0CCBB;
+    opacity: 0.6;
+}
+
+.dot.active {
+    background-color: #E0CCBB;
+}
+
+.next-chapter a {
+    color: #E0CCBB;
+    text-decoration: underline;
+    font-family: 'Lausanne';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 80%;
+}
+
+
+#bg-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1; /* behind your content */
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
