@@ -1,4 +1,4 @@
-# Three.js Journey (test)
+# Three.js Journey (test again)
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
