@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-// import GUI from 'lil-gui'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import GUI from 'lil-gui'
 import gsap from 'gsap'
 import { addImageSphereToScene } from './imageSphere.js'
 
@@ -44,7 +44,37 @@ const particleTexture = textureLoader.load('/textures/particles/1.png')
 /**
  * Sphere
  */
-addImageSphereToScene(scene)
+const sphereGroup = addImageSphereToScene(scene, (sphereGroup) => {
+  gsap.to(sphereGroup.position, {
+    x: 0,
+    z: 0,
+    duration: 2,
+    ease: 'power2.out'
+  })
+
+  gsap.to(sphereGroup.position, {
+    x: 0,
+    z: 0,
+    duration: 6,
+    ease: 'power2.out'
+  })
+  
+  gsap.to(sphereGroup.rotation, {
+    y: Math.PI * 2,
+    duration: 6,
+    ease: 'power2.inOut'
+  })
+
+  //   gsap.to(sphereGroup.position, {
+  //   y: "+=0.5",        // Float up a bit
+  //   duration: 1.9,     // Smooth and slow
+  //   repeat: -1,        // Infinite loop
+  //   yoyo: true,        // Go back and forth
+  //   ease: "sine.inOut" // Natural floating feel
+  // })
+
+  
+})
 
 /**
  * Particles
@@ -52,7 +82,7 @@ addImageSphereToScene(scene)
 
 // Geometry
 const starGeometry = new THREE.BufferGeometry()
-const particlesCount = 5000
+const particlesCount = 1000
 
 const positions = new Float32Array(particlesCount * 3) // Multiply by 3 because each position is composed of 3 values (x, y, z)
 const colors = new Float32Array(particlesCount * 3)
@@ -138,6 +168,25 @@ window.addEventListener('resize', () =>
 })
 
 /**
+ * Pre-loader
+ */
+gsap.to(".pre-loader-logo.fill", {
+  clipPath: "inset(0% 0 0 0)", // fully revealed
+  duration: 1.2,
+  ease: "power2.out"
+})
+
+//Hide preloader after animation
+gsap.to(".preloader", {
+  opacity: 0,
+  duration: 0.5,
+  delay: 1.4,
+  onComplete: () => {
+    document.querySelector(".preloader").style.display = "none"
+  }
+})
+
+/**
  * Camera
  */
 // Base camera
@@ -146,8 +195,8 @@ camera.position.z = 3
 scene.add(camera)
 
 // Controls
-// const controls = new OrbitControls(camera, $canvas)
-// controls.enableDamping = true
+const controls = new OrbitControls(camera, $canvas)
+controls.enableDamping = true
 
 /**
  * Text
@@ -205,16 +254,13 @@ const handleTick = (time, delta) => {
   
   const cameraZ = camera.position.z
   const overlay = document.querySelector('.overlay')
-  const exploreChapter = document.querySelector('.explore-chapter')
 
   if (cameraZ < 3) {
     introText.classList.add('visible')
     overlay.classList.add('visible')
-    exploreChapter.classList.add('visible')
   } else {
     introText.classList.remove('visible')
     overlay.classList.remove('visible')
-    exploreChapter.classList.remove('visible')
   }
   
 
