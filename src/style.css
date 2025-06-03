@@ -1,22 +1,19 @@
-*
-{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 html,
-body
-{
-    overflow: hidden;
-    background:#0D0E13;
+body {
+  overflow: hidden;
+  background: #0d0e13;
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
 }
 
 /* .preloader {
@@ -36,193 +33,187 @@ body
     visibility: hidden;
     pointer-events: none;
 } */
-  
 
 .preloader {
-    position: fixed;
-    inset: 0;
-    background: #0d0e13;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  position: fixed;
+  inset: 0;
+  background: #0d0e13;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
-  
+
 .pre-loader-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: auto;
 }
-  
-  
+
 .pre-loader-logo.fill {
-    clip-path: inset(100% 0 0 0); /* Hidden from bottom to top */
+  clip-path: inset(100% 0 0 0); /* Hidden from bottom to top */
 }
-  
 
 .custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 80px;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
-    color: #FFFFFF;
-    font-size: 0.75rem;
-    font-family: sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 99;
-    mix-blend-mode: difference;
-    backdrop-filter: blur(4px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 99;
+  mix-blend-mode: difference;
+  backdrop-filter: blur(4px);
 }
 .custom-cursor.visible {
-    opacity: 1;
-}  
+  opacity: 1;
+}
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1s ease;
-    z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  z-index: 5;
 }
-  
+
 .overlay.visible {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 /* Logo */
-.logo{
-    position: absolute;
-    width: 91.99px;
-    left: calc(50% - 91.99px/2 - 0px);
-    top: 6.21%;
-    bottom: 91.08%;
-    z-index: 10;
-    transition: opacity 1s ease;
+.logo {
+  position: absolute;
+  width: 91.99px;
+  left: calc(50% - 91.99px / 2 - 0px);
+  top: 6.21%;
+  bottom: 91.08%;
+  z-index: 10;
+  transition: opacity 1s ease;
 }
 
 .logo.visible {
-    opacity: 1;
+  opacity: 1;
 }
 
 /* Intro Text */
 .intro-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1s ease;
-    z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  z-index: 10;
 }
 
-.intro-text h1{
-    width: 965.94px;
-    height: 201px;
-    left: calc(50% - 965.94px/2 - 0.03px);
-    top: calc(50% - 201px/2 + 0.5px);
-    font-family: 'Lausanne';
-    font-style: normal;
-    font-weight: 350;
-    font-size: 100px;
-    line-height: 100px;
-    text-align: center;
-    letter-spacing: -3.48716px;
-    color: #E0CCBB;
-    transition: opacity 1s ease;
-    z-index: 10;
+.intro-text h1 {
+  width: 965.94px;
+  height: 201px;
+  left: calc(50% - 965.94px / 2 - 0.03px);
+  top: calc(50% - 201px / 2 + 0.5px);
+  font-family: "Lausanne";
+  font-style: normal;
+  font-weight: 350;
+  font-size: 100px;
+  line-height: 100px;
+  text-align: center;
+  letter-spacing: -3.48716px;
+  color: #e0ccbb;
+  transition: opacity 1s ease;
+  z-index: 10;
 }
 
-  
 .intro-text.visible {
-opacity: 1;
-pointer-events: auto;
+  opacity: 1;
+  pointer-events: auto;
 }
-  
+
 .intro-text p {
-position: absolute;
-width: 391.2px;
-margin-top: 130px;
-padding: 0.5rem 1rem;
-font-size: 18.13px;
-color: #E4E0DB;
-cursor: pointer;
-left: calc(50% - 391.2px/2 - 0.4px);
-text-align: center;
-font-family: 'Lausanne';
-font-style: normal;
-font-weight: 300;
-line-height: 24px;
+  position: absolute;
+  width: 391.2px;
+  margin-top: 130px;
+  padding: 0.5rem 1rem;
+  font-size: 18.13px;
+  color: #e4e0db;
+  cursor: pointer;
+  left: calc(50% - 391.2px / 2 - 0.4px);
+  text-align: center;
+  font-family: "Lausanne";
+  font-style: normal;
+  font-weight: 300;
+  line-height: 24px;
 }
-  
+
 /* Click button */
 .cta-inline {
-    text-decoration: none;
-    color: #E0CCBB;
-    border-bottom: 2px solid currentColor;
-    cursor: pointer;
-    transition: color 0.3s ease, border-color 0.3s ease;
-    z-index: 100;
+  text-decoration: none;
+  color: #e0ccbb;
+  border-bottom: 2px solid currentColor;
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  z-index: 100;
 }
-  
 
 /* Bottom Bar */
 .bottom-bar {
-    position: fixed;
-    width: 1320px;
-    height: 49px;
-    top: 730px;
-    left: 60px;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: fixed;
+  width: 1320px;
+  height: 49px;
+  top: 730px;
+  left: 60px;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .sound-button {
-    border: 1px solid #E0CCBB;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border: 1px solid #e0ccbb;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-  
+
 .explore-chapter a {
-    color: #E0CCBB;
-    text-decoration: underline;
-    font-family: 'Lausanne';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 80%;
+  color: #e0ccbb;
+  text-decoration: underline;
+  font-family: "Lausanne";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 80%;
 }
-  
+
 .explore-chapter {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  
-  .explore-chapter.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.explore-chapter.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
