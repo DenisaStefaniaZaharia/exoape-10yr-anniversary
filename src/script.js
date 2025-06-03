@@ -296,5 +296,5 @@ function startExitAnimation() {
   // Navigate after all animations finish
   setTimeout(() => {
     window.location.href = "chapters.html";
-  }, 4600);
+  }, 3600);
 }
