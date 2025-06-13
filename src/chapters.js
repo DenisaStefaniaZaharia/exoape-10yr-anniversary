@@ -82,7 +82,7 @@ sun.scale.set(0.1, 0.1, 0.1);
 
 //Sphere model
 let sphereModel;
-gltfLoader.load("glb/sphere.glb", (gltf) => {
+gltfLoader.load("/glb/sphere.glb", (gltf) => {
   sphereModel = gltf.scene;
   sphereModel.scale.set(0.13, 0.13, 0.13);
   sphereModel.position.copy(torus.position).add(new THREE.Vector3(-0.8, 0.9, 2));
@@ -109,7 +109,7 @@ gltfLoader.load("glb/sphere.glb", (gltf) => {
 //Second Chapter
 // const mesh2 = new THREE.Mesh(new THREE.ConeGeometry(1, 2, 32), material);
 let awward;
-gltfLoader.load("glb/awwwards-v2.glb", (gltf) => {
+gltfLoader.load("/glb/awwwards-v2.glb", (gltf) => {
   awward = gltf.scene;
   awward.scale.set(1.6, 1.6, 1.6);
   awward.position.x = objectsDistance * 1.4;
@@ -165,7 +165,7 @@ sun2.scale.set(0.1, 0.1, 0.1);
 
 //Sphere model
 let sphereModel2;
-gltfLoader.load("glb/sphere.glb", (gltf) => {
+gltfLoader.load("/glb/sphere.glb", (gltf) => {
   sphereModel2 = gltf.scene;
   sphereModel2.scale.set(0.13, 0.13, 0.13);
   sphereModel2.position.copy(torus2.position).add(new THREE.Vector3(0.7, 1.4, 2));
@@ -191,7 +191,7 @@ gltfLoader.load("glb/sphere.glb", (gltf) => {
 
 //Disc model
 let disc;
-gltfLoader.load("glb/disc-texture.glb", (gltf) => {
+gltfLoader.load("/glb/disc-texture.glb", (gltf) => {
   disc = gltf.scene;
   disc.scale.set(0.2, 0.2, 0.2);
   disc.rotation.set(Math.PI / 2, 0.7, 2.2);
@@ -217,7 +217,7 @@ gltfLoader.load("glb/disc-texture.glb", (gltf) => {
 
 //Fifth Chapter Infinite Model
 let infiniteModel;
-gltfLoader.load("glb/infinite.glb", (gltf) => {
+gltfLoader.load("/glb/infinite.glb", (gltf) => {
   infiniteModel = gltf.scene;
   infiniteModel.scale.set(0.4, 0.4, 0.4);
   infiniteModel.rotation.x = Math.PI;

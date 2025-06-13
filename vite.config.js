@@ -39,6 +39,8 @@ export default {
         main: resolve(__dirname, "src/index.html"),
         chapters: resolve(__dirname, "src/chapters.html"),
         firstChapter: resolve(__dirname, "src/first-chapter.html"),
+        secondChapter: resolve(__dirname, "src/milestones.html"),
+        thirdChapter: resolve(__dirname, "src/celebration.html"),
       },
     },
   },
