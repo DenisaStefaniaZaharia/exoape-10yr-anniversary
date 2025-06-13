@@ -174,7 +174,6 @@ scene.add(camera);
  * Text
  */
 const introText = document.querySelector(".intro-text");
-
 /**
  * Cursor
  */
@@ -195,18 +194,27 @@ document.addEventListener("mousemove", (e) => {
 });
 
 const cursorText = customCursor.querySelector("span");
-const ctaInline = document.querySelector(".cta-inline");
+const ctaInlineLinks = document.querySelectorAll(".cta-inline");
 
-// When mouse enters the "click" word
-ctaInline.addEventListener("mouseenter", () => {
-  customCursor.classList.add("visible");
-  cursorText.textContent = "Click";
-});
+//show only when hover once inside sphere
+let isHoveringCTA = false;
+ctaInlineLinks.forEach((link) => {
+  link.addEventListener("mouseenter", () => {
+    isHoveringCTA = true;
+    cursorText.textContent = "Click";
+    customCursor.classList.add("visible");
+  });
 
-// When mouse leaves the "click" word
-ctaInline.addEventListener("mouseleave", () => {
-  customCursor.classList.remove("visible");
-  cursorText.textContent = "Scroll";
+  link.addEventListener("mouseleave", () => {
+    isHoveringCTA = false;
+
+    if (camera.position.z >= 3) {
+      cursorText.textContent = "Scroll";
+      customCursor.classList.add("visible");
+    } else {
+      customCursor.classList.remove("visible");
+    }
+  });
 });
 
 /**
@@ -222,13 +230,27 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const handleTick = (time, delta) => {
   const cameraZ = camera.position.z;
   const overlay = document.querySelector(".overlay");
+  const exploreIntro = document.querySelector(".explore-chapter");
 
-  if (cameraZ < 3) {
+  const isInsideSphere = cameraZ < 3;
+
+  if (isInsideSphere) {
     introText.classList.add("visible");
     overlay.classList.add("visible");
+    exploreIntro.classList.add("visible");
+
+    if (!isHoveringCTA) {
+      customCursor.classList.remove("visible");
+    }
   } else {
     introText.classList.remove("visible");
     overlay.classList.remove("visible");
+    exploreIntro.classList.remove("visible");
+
+    if (!isHoveringCTA) {
+      customCursor.classList.add("visible");
+      cursorText.textContent = "Scroll";
+    }
   }
 
   // Smoothly interpolate the scroll value
@@ -254,10 +276,11 @@ const handleTick = (time, delta) => {
 // GSAP calls handleTick automatically every frame
 gsap.ticker.add(handleTick);
 
-//Trigger Animation
-ctaInline.addEventListener("click", (e) => {
-  e.preventDefault(); // Prevent immediate navigation
-  startExitAnimation(); // Trigger custom animation
+ctaInlineLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    startExitAnimation();
+  });
 });
 
 function startExitAnimation() {

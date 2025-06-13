@@ -3,86 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Horizontal Scrolling</title>
-    <link rel="stylesheet" href="chapters.css" />
+    <title>Chapters</title>
+    <link rel="stylesheet" href="./chapters.css" />
   </head>
   <body>
-    <!-- Add custom cursor -->
-    <div class="custom-cursor">
-      <span>Scroll</span>
+    <canvas class="webgl"></canvas>
+
+    <div class="top-bar">
+      <div class="logo">
+        <img src="/images/logo.svg" alt="Logo" />
+      </div>
+      <a href="index.html" class="close-button cta-inline">
+        <img src="/images/close.svg" alt="Close" />
+      </a>
     </div>
 
-    <div class="scroll-container" data-select="container">
-      <canvas data-select="canvas" class="webgl"></canvas>
+    <div class="scroll-wrapper">
+      <div class="custom-cursor">
+        <span>Scroll</span>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Where vision took its first step</h2>
+          <p class="description">Ten years ago, one idea set us in motion—to design experiences that make a difference. Fueled by passion and purpose, we began a journey that continues to evolve.</p>
+          <div class="link-chapter">
+            <a href="first-chapter.html" class="cta-inline">Our Story</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section class="section">
+        <div id="particles1" class="model-container"></div>
+      </section> -->
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Defining Moments</h2>
+          <p class="description">
+            Every project has shaped us. Challenges pushed us forward, and each success reminded us why we do what we do. We believe in pausing to celebrate those moments—because they fuel the passion
+            to keep growing.
+          </p>
+          <div class="link-chapter">
+            <a href="milestones.html" class="cta-inline">Milestones</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container celebrate">
+          <video class="showreel-video" autoplay muted loop playsinline>
+            <source src="/Showreel/showreel.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="link-chapter">
+            <a href="first-chapter.html" class="cta-inline">Play Showreel</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container celebrate">
+          <h2 class="section-title">Celebrate with us</h2>
+          <p class="description">
+            We couldn’t have done it without you. This journey is shaped by our clients, creative partners, and everyone we’ve met along the way. Thank you for being part of it.
+          </p>
+          <div class="link-chapter">
+            <a href="celebration.html" class="cta-inline">Celebrate with us</a>
+          </div>
+        </div>
+      </section>
     </div>
-
-    <section id="horizontal">
-      <div class="top-bar">
-        <div class="logo">
-          <img src="/images/logo.svg" alt="Logo" />
-        </div>
-        <a href="index.html" class="close-button">
-          <img src="/images/close.svg" alt="Close" />
-        </a>
-      </div>
-
-      <div class="content" id="chapter-1">
-        <p class="firstChapter">
-          Where vision <br />
-          took its first step
-        </p>
-        <p class="description">Ten years ago, one idea set us in motion—to design experiences that make a difference. Fueled by passion and purpose, we began a journey that continues to evolve.</p>
-
-        <div class="menu-chapter">
-          <a href="first-chapter.html">Our Story</a>
-        </div>
-        <canvas class="threeFirstModel"></canvas>
-      </div>
-
-      <div class="content stars" data-stars></div>
-
-      <div class="content" id="chapter-2">
-        <p class="firstChapter">
-          Defining <br />
-          Moments
-        </p>
-        <p class="description">
-          Every project has shaped us. Challenges pushed us forward, and each success reminded us why we do what we do. We believe in pausing to celebrate those moments—because they fuel the passion
-          to keep growing.
-        </p>
-
-        <div class="menu-chapter">
-          <a href="">Milestones</a>
-        </div>
-      </div>
-
-      <div class="content stars" data-stars></div>
-
-      <div class="content" id="chapter-3">
-        <video class="showreel-video" autoplay muted loop playsinline>
-          <source src="/images/showreel.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-
-      <div class="content stars" data-stars></div>
-
-      <div class="content" id="chapter-4">
-        <p class="firstChapter">
-          Celebrate <br />
-          with us
-        </p>
-        <p class="description">We couldn't have done it without you. This journey is shaped by our clients, creative partners, and everyone we've met along the way. Thank you for being part of it.</p>
-
-        <div class="menu-chapter">
-          <a href="">Celebrate with us</a>
-        </div>
-      </div>
-    </section>
 
     <!-- Bottom Navigation -->
     <div class="bottom-bar">
-      <div class="sound-button">
+      <div class="sound-button cta-inline">
         <img src="/images/sound.svg" alt="Sound Toggle" />
       </div>
 
@@ -94,19 +89,10 @@
       </div>
 
       <div class="next-chapter">
-        <a href="">Next Chapter</a>
+        <a id="nextChapterBtn" class="cta-inline">Next Chapter</a>
       </div>
     </div>
 
-    <!-- //To fade the new page in smoothly when loaded. -->
-    <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        document.body.classList.add("fade-in");
-      });
-    </script>
-
     <script type="module" src="./chapters.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   </body>
 </html>

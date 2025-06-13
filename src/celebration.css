@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: #0d0e13;
+  overflow-x: hidden;
+}
+
+/* Top Bar */
+.top-bar {
+  position: absolute;
+  width: 1320px;
+  height: 40px;
+  left: 60px;
+  top: 40px;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 24px;
+  pointer-events: auto;
+}
+
+.close-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #888888;
+  border-radius: 50%;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Header */
+
+.celebrationChapter {
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  font-family: "TWK Lausanne";
+  color: #e0ccbb;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 13vw 8vw 0 8vw;
+  position: relative;
+  z-index: 3;
+}
+
+.intro {
+  opacity: 0.8;
+}
+
+.title-line {
+  margin: 5.2083333333vw 0;
+  font-family: "TWK Lausanne";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 225.094px;
+}
+
+.intro {
+  width: 381px;
+  font-weight: 400;
+  font-size: 18.125px;
+  line-height: 26px;
+  opacity: 0.8;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  flex-wrap: nowrap;
+}
+
+.text {
+  white-space: nowrap;
+  width: auto;
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+/*Hero*/
+
+.hero {
+  position: relative;
+  text-align: center;
+}
+
+.hero .container {
+  align-items: center;
+}
+
+.hero .intro {
+  margin-bottom: 6rem;
+}
+
+/*Anniversary Party Section*/
+.anniversaryParty .container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: start;
+  margin-top: 100px;
+}
+
+.anniversaryParty .intro {
+  grid-column: 4 / 8;
+  grid-row: 1;
+  width: 483px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 40px;
+  letter-spacing: -0.1px;
+}
+
+/* canvas#webgl {
+  display: block;
+  width: 100%;
+  height: 100%;
+} */
+
+.webgl {
+  width: 0px;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#webgl {
+  display: flex;
+  flex-direction: column;
+  margin: 13vw 8vw 0 8vw;
+  position: relative;
+  z-index: 3;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 99;
+  mix-blend-mode: difference;
+  backdrop-filter: blur(4px);
+}
+
+.custom-cursor.visible {
+  opacity: 1;
+}
+
+.custom-cursor span {
+  color: #ffffff !important;
+  font-family: "Lausanne";
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* Next Chapter*/
+
+.next-chapter .container {
+  text-align: center;
+}
+
+.next-chapter .label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #e0ccbb;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.next-chapter-link {
+  text-decoration: none;
+  font-size: 225.094px;
+  letter-spacing: -7.81575px;
+  color: #e0ccbb;
+}
+
+/* .next-chapter .container {
+  margin: 9vw 8vw 0 8vw;
+} */

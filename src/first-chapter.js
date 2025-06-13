@@ -1,15 +1,16 @@
 import gsap from "gsap";
+import SplitText from "gsap/SplitText";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
-// Custom cursor setup
+gsap.registerPlugin(SplitText, ScrollTrigger);
+
+// Custom cursor (unchanged)
 const customCursor = document.querySelector(".custom-cursor");
 const cursorText = customCursor.querySelector("span");
 
-// Track mouse position
 document.addEventListener("mousemove", (e) => {
-  // Show the cursor
   customCursor.classList.add("visible");
 
-  // Smooth follow using GSAP
   gsap.to(customCursor, {
     x: e.clientX - 5,
     y: e.clientY - 3,
@@ -18,9 +19,8 @@ document.addEventListener("mousemove", (e) => {
   });
 });
 
-// Add hover effects for clickable elements
 const clickableElements = document.querySelectorAll('a, button, [data-cursor="hover"]');
-clickableElements.forEach(element => {
+clickableElements.forEach((element) => {
   element.addEventListener("mouseenter", () => {
     customCursor.classList.add("visible");
     cursorText.textContent = "Click";
@@ -30,4 +30,26 @@ clickableElements.forEach(element => {
     customCursor.classList.remove("visible");
     cursorText.textContent = "Scroll";
   });
-}); 
+});
+
+document.fonts.ready.then(() => {
+  gsap.set(".title-line", { opacity: 1 });
+
+  let title;
+  SplitText.create(".title-line", {
+    type: "words,lines",
+    linesClass: "line",
+    autoSplit: true,
+    mask: "lines",
+    onSplit: (self) => {
+      title = gsap.from(self.lines, {
+        duration: 5,
+        yPercent: 100,
+        opacity: 0,
+        stagger: 0.2,
+        ease: "expo.out",
+      });
+      return title;
+    },
+  });
+});

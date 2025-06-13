@@ -92,7 +92,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 1s ease;
-  z-index: 5;
+  z-index: 4;
 }
 
 .overlay.visible {
@@ -179,7 +179,7 @@ body {
   position: fixed;
   width: 1320px;
   height: 49px;
-  top: 730px;
+  top: 700px;
   left: 60px;
   right: 0;
   display: flex;
@@ -199,7 +199,6 @@ body {
 
 .explore-chapter a {
   color: #e0ccbb;
-  text-decoration: underline;
   font-family: "Lausanne";
   font-style: normal;
   font-weight: 400;
@@ -208,12 +207,12 @@ body {
 }
 
 .explore-chapter {
+  color: white;
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 1s ease;
+  z-index: 5;
 }
 
 .explore-chapter.visible {
   opacity: 1;
-  pointer-events: auto;
 }

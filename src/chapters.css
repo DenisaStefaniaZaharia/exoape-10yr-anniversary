@@ -1,19 +1,10 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
   background: #0d0e13;
-}
-
-body {
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-}
-body.fade-in {
-  opacity: 1;
 }
 
 .webgl {
@@ -21,6 +12,30 @@ body.fade-in {
   top: 0;
   left: 0;
   outline: none;
+  z-index: 1;
+}
+
+body {
+  width: 400vw;
+  height: 100vh;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.section {
+  display: inline-flex;
+  /* justify-content: center; */
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Cabin", sans-serif;
+  color: #ffeded;
+  padding-left: 6%;
+  padding-right: 10%;
+  white-space: normal;
+  vertical-align: top;
+  z-index: 10;
 }
 
 /* Top Bar */
@@ -51,47 +66,6 @@ body.fade-in {
   justify-content: center;
   align-items: center;
 }
-
-/* Horizontal Sections */
-#horizontal .content {
-  height: 100vh;
-  width: 100vw;
-  display: grid;
-  flex-shrink: 0;
-  place-items: center;
-}
-
-#horizontal {
-  display: flex;
-}
-
-.firstChapter {
-  position: absolute;
-  left: calc(50% - 965.94px / 2 + 151.97px);
-  top: calc(50% - 201px / 2 - 77.5px);
-  font-family: "TWK Lausanne", sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 100.43px;
-  line-height: 100px;
-  letter-spacing: -3.48716px;
-  color: #e0ccbb;
-}
-
-.description {
-  position: absolute;
-  width: 389px;
-  height: 121px;
-  left: calc(50% - 389px / 2 - 127.5px);
-  top: 461px;
-  font-family: "Lausanne";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 18.125px;
-  line-height: 24px;
-  color: #e4e0db;
-}
-
 .menu-chapter {
   position: absolute;
   width: 127px;
@@ -110,12 +84,102 @@ body.fade-in {
   color: #e0ccbb;
 }
 
+.scroll-wrapper {
+  display: flex;
+  width: 400vw; /* 100vw * number of sections */
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.section-title {
+  width: 700px;
+  font-family: "TWK Lausanne";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 100.43px;
+  line-height: 100px;
+  letter-spacing: -3.48716px;
+  color: #e0ccbb;
+}
+
+.description {
+  width: 389px;
+  font-family: "Lausanne";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18.125px;
+  line-height: 24px;
+  color: #e4e0db;
+}
+
+.link-chapter {
+  width: 127px;
+}
+
+.link-chapter a {
+  font-family: "Lausanne";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 80%;
+  text-decoration-line: underline;
+  color: #e0ccbb;
+}
+
+.celebrate .section-title {
+  width: 500px;
+}
+
+.showreel-video {
+  width: 644px;
+  height: 362px;
+  left: calc(50% - 644px / 2);
+  top: 244px;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 99;
+  mix-blend-mode: difference;
+  backdrop-filter: blur(4px);
+}
+.custom-cursor.visible {
+  opacity: 1;
+}
+
+.custom-cursor span {
+  color: #ffffff !important;
+  font-family: "Lausanne";
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
 /* Bottom Bar */
 .bottom-bar {
   position: fixed;
   width: 1320px;
   height: 49px;
-  top: 730px;
+  top: 700px;
   left: 60px;
   right: 0;
   display: flex;
@@ -158,54 +222,4 @@ body.fade-in {
   font-weight: 400;
   font-size: 14px;
   line-height: 80%;
-}
-
-#bg-particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.showreel-video {
-  width: 644px;
-  height: 362px;
-  height: auto;
-  object-fit: cover;
-  margin-top: 20px;
-}
-
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 80px;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-family: sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 99;
-  mix-blend-mode: difference;
-  backdrop-filter: blur(4px);
-}
-.custom-cursor.visible {
-  opacity: 1;
-}
-
-.custom-cursor span {
-  color: #ffffff !important;
-  font-family: "Lausanne";
-  font-size: 0.75rem;
-  white-space: nowrap;
 }
