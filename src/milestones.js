@@ -4,6 +4,11 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -67,37 +72,87 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
+// DRACO loader setup
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath("/draco/");
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+
+const textureLoader = new THREE.TextureLoader();
+
+const environmentMap = textureLoader.load("/environmentMaps/blockadesLabsSkybox/interior_views_cozy_wood_cabin_with_cauldron_and_p.jpg");
+environmentMap.mapping = THREE.EquirectangularReflectionMapping;
+environmentMap.colorSpace = THREE.SRGBColorSpace;
+
+const torusMaterial = new THREE.MeshStandardMaterial({
+  color: 0xb09983,
+  roughness: 0.5,
+  metalness: 0.9,
+  wireframe: false,
+});
+
+const sunMaterial = new THREE.MeshBasicMaterial({
+  color: 0xfffce8,
+});
+
 /**
  * Load Model
  */
-const gltfLoader = new GLTFLoader();
+const torus2 = new THREE.Mesh(new THREE.TorusGeometry(8, 0.06, 5, 80), torusMaterial);
+torus2.scale.set(0.2, 0.2, 0.2);
+torus2.rotation.set(1, 0, 0);
+torus2.position.y = -0.3;
+// torus2.position.set(0, -0.9, 0.5);
+scene.add(torus2);
 
-let mixer = null;
-gltfLoader.load("/models/Fox/glTF/Fox.gltf", (gltf) => {
-  mixer = new THREE.AnimationMixer(gltf.scene);
-  const action = mixer.clipAction(gltf.animations[2]);
-  action.play();
-
-  gltf.scene.scale.set(0.025, 0.025, 0.025);
-  scene.add(gltf.scene);
+let disc;
+gltfLoader.load("/glb/disc-texture.glb", (gltf) => {
+  disc = gltf.scene;
+  disc.scale.set(0.26, 0.26, 0.26);
+  disc.rotation.set(-0.5, 0, -0.8);
+  disc.position.y = 1;
+  disc.position.x = 0;
+  scene.add(disc);
 });
+
+//Sphere model
+let sphereModel2;
+gltfLoader.load("/glb/sphere.glb", (gltf) => {
+  sphereModel2 = gltf.scene;
+  sphereModel2.scale.set(0.2, 0.2, 0.2);
+  sphereModel2.position.set(0, 1.6, -0.9);
+  const sphereMaterial = new THREE.MeshStandardMaterial({
+    color: "#232323",
+    roughness: 0.5,
+    metalness: 0.3,
+  });
+
+  //applied material to all meshes inside the GLTF model
+  sphereModel2.traverse((child) => {
+    if (child.isMesh) {
+      child.material = sphereMaterial;
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  scene.add(sphereModel2);
+});
+
+const sun = new THREE.Mesh(new THREE.SphereGeometry(0.4, 20, 20), sunMaterial);
+sun.position.set(0.6, 1.9, -0.9);
+sun.scale.set(0.15, 0.15, 0.15);
+scene.add(sun);
+
+const bulbLight = new THREE.PointLight(0xfffce8, 2, 5);
+bulbLight.position.copy(sun.position);
+scene.add(bulbLight);
 
 /**
  * Lights
  */
 const ambientLight = new THREE.AmbientLight(0xffffff, 2.4);
 scene.add(ambientLight);
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1.8);
-directionalLight.castShadow = true;
-directionalLight.shadow.mapSize.set(1024, 1024);
-directionalLight.shadow.camera.far = 15;
-directionalLight.shadow.camera.left = -7;
-directionalLight.shadow.camera.top = 7;
-directionalLight.shadow.camera.right = 7;
-directionalLight.shadow.camera.bottom = -7;
-directionalLight.position.set(5, 5, 5);
-scene.add(directionalLight);
 
 /**
  * Sizes
@@ -119,6 +174,8 @@ window.addEventListener("resize", () => {
   // Update renderer
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  composer.setSize(sizes.width, sizes.height);
 });
 
 /**
@@ -148,6 +205,21 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 /**
+ * Postprocessing: Bloom
+ */
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(sizes.width, sizes.height),
+  1.5, // strength
+  0.4, // radius
+  0.85 // threshold
+);
+composer.addPass(bloomPass);
+
+/**
  * Animate
  */
 const clock = new THREE.Clock();
@@ -158,18 +230,10 @@ const tick = () => {
   const deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime;
 
-  //Update mixer
-  if (mixer != null) {
-    mixer.update(deltaTime);
-  }
-
-  // Update controls
   controls.update();
-
   // Render
-  renderer.render(scene, camera);
+  composer.render();
 
-  // Call tick again on the next frame
   window.requestAnimationFrame(tick);
 };
 

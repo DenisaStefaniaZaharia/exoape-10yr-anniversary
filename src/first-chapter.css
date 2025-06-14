@@ -5,8 +5,30 @@
 }
 
 html {
-  background: #0d0e13;
+  /* background: #0d0e13; */
+  background: black;
 }
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+/* .webgl {
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#webgl {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+} */
 
 /* Top Bar */
 .top-bar {
@@ -62,8 +84,13 @@ html {
   opacity: 0.8;
 }
 
+.title {
+  line-height: 225px;
+  margin-top: 100px;
+  margin-bottom: 90px;
+}
+
 .title-line {
-  margin: 5.2083333333vw 0;
   font-family: "TWK Lausanne";
   font-style: normal;
   font-weight: 300;
@@ -241,7 +268,6 @@ html {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  margin-bottom: 80px;
 }
 
 .img {
@@ -265,6 +291,7 @@ html {
   gap: 20px 1px;
   align-items: start;
   margin-top: 100px;
+  margin-bottom: 90vh;
 }
 .team-complete .title {
   grid-column: 6 / 12;
@@ -289,9 +316,12 @@ html {
 
 /* Next Chapter*/
 
-.next-chapter .container {
+.next-chapter .nextContainer {
   text-align: center;
 }
+/* .next-chapter {
+  height: 100vh;
+} */
 
 .next-chapter .label {
   display: flex;
@@ -342,3 +372,19 @@ html {
   font-size: 0.75rem;
   white-space: nowrap;
 }
+
+/* .webgl {
+  width: 0px;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#webgl {
+  display: flex;
+  flex-direction: column;
+  margin: 13vw 8vw 0 8vw;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+} */

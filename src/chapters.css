@@ -40,7 +40,7 @@ body {
 
 /* Top Bar */
 .top-bar {
-  position: absolute;
+  position: fixed;
   width: 1320px;
   height: 40px;
   left: 60px;
@@ -49,6 +49,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: calc(100vw - 120px);
 }
 
 .logo img {
@@ -185,6 +186,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 9999;
 }
 
 .sound-button {

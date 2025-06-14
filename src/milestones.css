@@ -5,7 +5,8 @@
 }
 
 html {
-  background: #0d0e13;
+  /* background: #0d0e13; */
+  background: black;
 }
 
 /* Top Bar */
@@ -61,8 +62,13 @@ html {
   opacity: 0.8;
 }
 
+.title {
+  line-height: 225px;
+  margin-top: 100px;
+  margin-bottom: 90px;
+}
+
 .title-line {
-  margin: 5.2083333333vw 0;
   font-family: "TWK Lausanne";
   font-style: normal;
   font-weight: 300;
@@ -334,7 +340,7 @@ html {
 #webgl {
   display: flex;
   flex-direction: column;
-  margin: 13vw 8vw 0 8vw;
+  /* margin: 13vw 8vw 0 8vw; */
   position: relative;
   z-index: 3;
   pointer-events: none;

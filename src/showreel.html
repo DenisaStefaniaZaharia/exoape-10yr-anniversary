@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Showreel</title>
+    <link rel="stylesheet" href="showreel.css" />
+  </head>
+  <body>
+    <div class="custom-cursor">
+      <span>Scroll</span>
+    </div>
+
+    <div class="top-bar">
+      <div class="logo">
+        <img src="/images/logo.svg" alt="Logo" />
+      </div>
+      <a href="chapters.html" class="close-button">
+        <img src="/images/close.svg" alt="Close" />
+      </a>
+    </div>
+
+    <div class="showreelChapter">
+      <section class="showreelVideo">
+        <div class="container">
+          <video class="showreel-video" id="showreelVideo" autoplay muted controls playsinline>
+            <source src="/Showreel/showreel.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+
+      <!-- Next Chapter -->
+      <section class="next-chapter" id="awward-section">
+        <div class="nextContainer">
+          <h2 class="label">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path d="M7.41908 4.56679L6.13722 0L4.85418 4.92566L0 6L4.85418 7.25435L6.13722 12L7.32766 7.25435L12 6L7.41908 4.56679Z" fill="currentColor" />
+            </svg>
+            <div class="text">Next Chapter</div>
+          </h2>
+
+          <a href="celebration.html" class="next-chapter-link">
+            <h1 class="title">
+              <div class="title-line">Celebrate</div>
+              <div class="title-line">With us</div>
+            </h1>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const playWithSound = urlParams.get("playWithSound") === "true";
+
+        const video = document.getElementById("showreelVideo");
+
+        if (playWithSound) {
+          video.muted = false;
+
+          // Force autoplay with sound only after user interaction (which already happened on click)
+          video.play().catch((err) => {
+            console.warn("Autoplay with sound failed:", err);
+          });
+        } else {
+          // Default fallback: autoplay muted
+          video.muted = true;
+          video.play();
+        }
+
+        video.addEventListener("ended", () => {
+          video.currentTime = 0;
+          video.play();
+        });
+      });
+    </script>
+  </body>
+</html>

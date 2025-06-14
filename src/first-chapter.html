@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="first-chapter.css" />
   </head>
   <body>
+    <canvas class="webgl"></canvas>
     <div class="custom-cursor">
       <span>Scroll</span>
     </div>
@@ -108,6 +109,7 @@
               at a time.
             </p>
           </div>
+
           <div class="block ape">
             <div class="title">
               <div class="title-line">Ape</div>
@@ -119,9 +121,6 @@
             </p>
           </div>
         </div>
-        <!-- <div>
-                <canvas></canvas>
-            </div> -->
       </section>
 
       <section>
@@ -150,9 +149,11 @@
       </section>
 
       <!-- Next Chapter -->
-      <section class="next-chapter">
-        <div class="container">
-          <canvas id="three-canvas"></canvas>
+      <section class="next-chapter" id="awward-section">
+        <!-- <div id="webgl">
+          <canvas class="webgl"></canvas>
+        </div> -->
+        <div class="nextContainer">
           <h2 class="label">
             <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
               <path d="M7.41908 4.56679L6.13722 0L4.85418 4.92566L0 6L4.85418 7.25435L6.13722 12L7.32766 7.25435L12 6L7.41908 4.56679Z" fill="currentColor" />

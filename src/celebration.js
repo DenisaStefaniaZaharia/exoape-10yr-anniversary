@@ -7,6 +7,10 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { AnimationMixer } from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 // Custom cursor (unchanged)
@@ -72,27 +76,99 @@ const scene = new THREE.Scene();
 /**
  * Load Model
  */
-const gltfLoader = new GLTFLoader();
+//DRACO loader setup
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("/draco/");
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
 
-//draco model
-gltfLoader.load("/glb/number10F.glb", (gltf) => {
-  gltf.scene.rotation.y = Math.PI;
-  // gltf.scene.position.x = 5;
-  gltf.scene.scale.set(4, 4, 4);
-  scene.add(gltf.scene);
+/**
+ * Objects
+ */
+
+// Material
+const torusMaterial = new THREE.MeshStandardMaterial({
+  color: 0xb09983,
+  roughness: 0.5,
+  metalness: 0.9,
+  wireframe: false,
 });
+
+const sunMaterial = new THREE.MeshBasicMaterial({
+  color: 0xfffce8,
+});
+
+const objectsDistance = 4;
+
+// Meshes
+
+const numLights = 3;
+const radius = 1.5;
+const speed = 0.5;
+const lightArray = [];
+
+//Infinite model
+let infinite;
+gltfLoader.load("/glb/infinite.glb", (gltf) => {
+  infinite = gltf.scene;
+  infinite.scale.set(0.4, 0.4, 0.4);
+  infinite.rotation.x = Math.PI;
+  infinite.position.y = -objectsDistance * 1.2;
+
+  infinite.traverse((child) => {
+    if (child.isMesh) {
+      child.material = torusMaterial;
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  scene.add(infinite);
+  sectionMeshes.push(infinite);
+
+  const infinityGroup = new THREE.Group();
+  scene.add(infinityGroup);
+
+  for (let i = 0; i < numLights; i++) {
+    const sunSphere = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), sunMaterial);
+
+    const pointLight = new THREE.PointLight(0xfffce8, 2, 3);
+    pointLight.castShadow = false;
+
+    infinityGroup.add(sunSphere);
+    infinityGroup.add(pointLight);
+
+    lightArray.push({
+      mesh: sunSphere,
+      light: pointLight,
+      offset: (i / numLights) * Math.PI * 2, // phase offset
+    });
+  }
+
+  infinityGroup.position.copy(infinite.position);
+});
+
+//Ten model
+let tenModel;
+gltfLoader.load("/glb/number10.glb", (gltf) => {
+  tenModel = gltf.scene;
+  tenModel.scale.set(1, 1, 1);
+  tenModel.rotation.y = Math.PI;
+  tenModel.position.y = -objectsDistance * 3.8;
+
+  scene.add(tenModel);
+  sectionMeshes.push(tenModel);
+});
+
+const sectionMeshes = [];
+
 /**
  * Lights
  */
-const ambientLight = new THREE.AmbientLight(0xffffff, 2.4);
-scene.add(ambientLight);
-
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1.8);
 directionalLight.castShadow = true;
 directionalLight.shadow.mapSize.set(1024, 1024);
-directionalLight.shadow.camera.far = 15;
+directionalLight.shadow.camera.far = 20;
 directionalLight.shadow.camera.left = -7;
 directionalLight.shadow.camera.top = 7;
 directionalLight.shadow.camera.right = 7;
@@ -123,18 +199,37 @@ window.addEventListener("resize", () => {
 });
 
 /**
+ * Scroll
+ */
+let scrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+  scrollY = window.scrollY;
+});
+
+/**
+ * Cursor
+ */
+const cursor = {};
+cursor.x = 0;
+cursor.y = 0;
+
+window.addEventListener("mousemove", (event) => {
+  cursor.x = event.clientX / sizes.width - 0.5;
+  cursor.y = event.clientY / sizes.height - 0.5;
+});
+
+/**
  * Camera
  */
-// Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-// camera.position.set(2, 2, 2);
-camera.position.set(-11, 0, 1);
-scene.add(camera);
+//Group camera for scrolling
+const groupCamera = new THREE.Group();
+scene.add(groupCamera);
 
-// Controls
-const controls = new OrbitControls(camera, canvas);
-controls.target.set(0, 0.75, 0);
-controls.enableDamping = true;
+// Base camera
+const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100);
+camera.position.z = 6;
+groupCamera.add(camera);
 
 /**
  * Renderer
@@ -144,32 +239,60 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true,
   alpha: true,
 });
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+/**
+ * Postprocessing: Bloom
+ */
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+renderPass.clear = true;
+renderPass.clearAlpha = 0;
+composer.addPass(renderPass);
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(sizes.width, sizes.height),
+  1.5, // strength
+  0.4, // radius
+  0.85 // threshold
+);
+composer.addPass(bloomPass);
 
 /**
  * Animate
  */
 const clock = new THREE.Clock();
-// let previousTime = 0;
+let previousTime = 0;
 
 const tick = () => {
-  //   const elapsedTime = clock.getElapsedTime();
-  //   const deltaTime = elapsedTime - previousTime;
-  //   previousTime = elapsedTime;
+  const elapsedTime = clock.getElapsedTime();
+  const deltaTime = elapsedTime - previousTime;
+  previousTime = elapsedTime;
 
-  //   //Update mixer
-  //   if (mixer != null) {
-  //     mixer.update(deltaTime);
-  //   }
+  //3 suns celebration section
+  lightArray.forEach(({ mesh, light, offset }) => {
+    const t = elapsedTime * speed + offset;
 
-  // Update controls
-  controls.update();
+    //parametric infinity shape (lemniscate of Gerono)
+    const x = radius * Math.sin(t);
+    const y = radius * Math.sin(t) * Math.cos(t);
+
+    mesh.position.set(x, y, 0);
+    light.position.copy(mesh.position);
+  });
+
+  // Animate camera
+  camera.position.y = (-scrollY / sizes.height) * objectsDistance;
+
+  const parallaxX = cursor.x * 0.5;
+  const parallaxY = -cursor.y * 0.5;
+
+  groupCamera.position.x += (parallaxX - groupCamera.position.x) * 5 * deltaTime;
+  groupCamera.position.y += (parallaxY - groupCamera.position.y) * 5 * deltaTime;
 
   // Render
-  renderer.render(scene, camera);
+  composer.render();
 
   // Call tick again on the next frame
   window.requestAnimationFrame(tick);
