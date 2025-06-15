@@ -97,7 +97,7 @@ scene.add(bulbLight);
 //Sphere model
 let sphereModel;
 gltfLoader.load(
-  "/glb/sphere.glb",
+  "glb/sphere.glb",
   (gltf) => {
     sphereModel = gltf.scene;
     sphereModel.scale.set(0.13, 0.13, 0.13);
