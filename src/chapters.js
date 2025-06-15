@@ -515,25 +515,25 @@ window.addEventListener(
  *
  * Wheel
  */
-const handleWheel = (event) => {
-  //   event.preventDefault(); // Prevent normal vertical scrolling
-  state.scroll.position -= event.deltaY * 0.05;
-};
+// const handleWheel = (event) => {
+//   //   event.preventDefault(); // Prevent normal vertical scrolling
+//   state.scroll.position -= event.deltaY * 0.05;
+// };
 
-document.addEventListener("wheel", handleWheel);
+// document.addEventListener("wheel", handleWheel);
 
-// Handle resize
-const handleResize = () => {
-  state.dimensions.width = window.innerWidth;
-  state.dimensions.height = window.innerHeight;
+// // Handle resize
+// const handleResize = () => {
+//   state.dimensions.width = window.innerWidth;
+//   state.dimensions.height = window.innerHeight;
 
-  // particleSystems.forEach(({ camera, renderer }) => {
-  //   camera.aspect = state.dimensions.width / state.dimensions.height;
-  //   camera.updateProjectionMatrix();
-  //   renderer.setSize(state.dimensions.width, state.dimensions.height);
-  // });
-};
-window.addEventListener("resize", handleResize);
+//   // particleSystems.forEach(({ camera, renderer }) => {
+//   //   camera.aspect = state.dimensions.width / state.dimensions.height;
+//   //   camera.updateProjectionMatrix();
+//   //   renderer.setSize(state.dimensions.width, state.dimensions.height);
+//   // });
+// };
+// window.addEventListener("resize", handleResize);
 
 /**
  * Cursor
