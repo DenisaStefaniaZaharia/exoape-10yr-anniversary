@@ -96,79 +96,86 @@ scene.add(bulbLight);
 
 //Sphere model
 let sphereModel;
-gltfLoader.load("/glb/sphere.glb", (gltf) => {
-  sphereModel = gltf.scene;
-  sphereModel.scale.set(0.13, 0.13, 0.13);
-  sphereModel.position.copy(torus.position).add(new THREE.Vector3(-0.8, 0.9, 2));
+gltfLoader.load(
+  "/glb/sphere.glb",
+  (gltf) => {
+    sphereModel = gltf.scene;
+    sphereModel.scale.set(0.13, 0.13, 0.13);
+    sphereModel.position.copy(torus.position).add(new THREE.Vector3(-0.8, 0.9, 2));
 
-  const sphereMaterial = new THREE.MeshStandardMaterial({
-    color: "#232323",
-    roughness: 0.5,
-    metalness: 0.3,
-  });
+    const sphereMaterial = new THREE.MeshStandardMaterial({
+      color: "#232323",
+      roughness: 0.5,
+      metalness: 0.3,
+    });
 
-  //applied  material to all meshes inside the GLTF model
-  sphereModel.traverse((child) => {
-    if (child.isMesh) {
-      child.material = sphereMaterial;
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+    //applied  material to all meshes inside the GLTF model
+    sphereModel.traverse((child) => {
+      if (child.isMesh) {
+        child.material = sphereMaterial;
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
 
-  scene.add(sphereModel);
-  sectionMeshes.push(sphereModel);
+    scene.add(sphereModel);
+    sectionMeshes.push(sphereModel);
 
-  //Glow light that follows sphere around torus
-  const glowLight = new THREE.PointLight(0xfffce8, 2, 5);
-  scene.add(glowLight);
-  const glowGeometry = new THREE.SphereGeometry(0.1, 16, 16);
-  const glowMaterial = new THREE.MeshBasicMaterial({
-    color: 0xfffce8,
-    transparent: true,
-    opacity: 0.4,
-  });
-  const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
-  scene.add(glowMesh);
+    //Glow light that follows sphere around torus
+    const glowLight = new THREE.PointLight(0xfffce8, 2, 5);
+    scene.add(glowLight);
+    const glowGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+    const glowMaterial = new THREE.MeshBasicMaterial({
+      color: 0xfffce8,
+      transparent: true,
+      opacity: 0.4,
+    });
+    const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
+    scene.add(glowMesh);
 
-  let angle = { u: 0 };
+    let angle = { u: 0 };
 
-  gsap.to(angle, {
-    u: Math.PI * 2,
-    repeat: -1,
-    duration: 10,
-    ease: "none",
-    onUpdate: () => {
-      const R = 1.6; // major radius
-      const r = 0.07; // minor radius
-      const v = Math.PI / 4; // fixed around tube
+    gsap.to(angle, {
+      u: Math.PI * 2,
+      repeat: -1,
+      duration: 10,
+      ease: "none",
+      onUpdate: () => {
+        const R = 1.6; // major radius
+        const r = 0.07; // minor radius
+        const v = Math.PI / 4; // fixed around tube
 
-      const pos = getTorusPoint(R, r, angle.u, v);
+        const pos = getTorusPoint(R, r, angle.u, v);
 
-      const localPos = getTorusPoint(R, r, angle.u, v);
-      const worldPos = localPos.clone().applyEuler(torus.rotation).add(torus.position);
-      sphereModel.position.copy(worldPos);
+        const localPos = getTorusPoint(R, r, angle.u, v);
+        const worldPos = localPos.clone().applyEuler(torus.rotation).add(torus.position);
+        sphereModel.position.copy(worldPos);
 
-      sphereModel.rotation.y = angle.u;
+        sphereModel.rotation.y = angle.u;
 
-      //animate light
-      glowLight.position.copy(worldPos);
-      glowMesh.position.copy(worldPos);
+        //animate light
+        glowLight.position.copy(worldPos);
+        glowMesh.position.copy(worldPos);
 
-      //animate sun
-      const sunOrbitRadius = 0.5; // distance from the sphere
-      const orbitSpeed = 2; // speed multiplier for orbit
-      const orbitAngle = angle.u * orbitSpeed;
+        //animate sun
+        const sunOrbitRadius = 0.5; // distance from the sphere
+        const orbitSpeed = 2; // speed multiplier for orbit
+        const orbitAngle = angle.u * orbitSpeed;
 
-      const offsetX = sunOrbitRadius * Math.cos(orbitAngle);
-      const offsetY = sunOrbitRadius * Math.sin(orbitAngle);
+        const offsetX = sunOrbitRadius * Math.cos(orbitAngle);
+        const offsetY = sunOrbitRadius * Math.sin(orbitAngle);
 
-      const sunOffset = new THREE.Vector3(offsetX, offsetY, 0);
-      sun.position.copy(worldPos.clone().add(sunOffset));
-      bulbLight.position.copy(sun.position); //light follow the sun
-    },
-  });
-});
+        const sunOffset = new THREE.Vector3(offsetX, offsetY, 0);
+        sun.position.copy(worldPos.clone().add(sunOffset));
+        bulbLight.position.copy(sun.position); //light follow the sun
+      },
+    });
+  },
+  undefined,
+  (error) => {
+    console.error("❌ Failed to load sphere.glb:", error);
+  }
+);
 
 //Second Chapter
 let awward;
