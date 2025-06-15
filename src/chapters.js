@@ -64,7 +64,7 @@ const sunMaterial = new THREE.MeshBasicMaterial({
 
 // DRACO loader setup
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("/draco/");
+dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
@@ -97,7 +97,7 @@ scene.add(bulbLight);
 //Sphere model
 let sphereModel;
 gltfLoader.load(
-  "glb/sphere.glb",
+  "/glb/sphere.glb",
   (gltf) => {
     sphereModel = gltf.scene;
     sphereModel.scale.set(0.13, 0.13, 0.13);
