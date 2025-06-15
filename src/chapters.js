@@ -339,16 +339,16 @@ sectionMeshes.push(torus, sun, torus2, sun2);
  * Particles
  */
 
-const state = {
-  scroll: {
-    position: 0,
-    intensity: 0,
-    lerped: {
-      current: 0,
-      previous: 0,
-    },
-  },
-};
+// const state = {
+//   scroll: {
+//     position: 0,
+//     intensity: 0,
+//     lerped: {
+//       current: 0,
+//       previous: 0,
+//     },
+//   },
+// };
 
 //Geometry
 const particlesCount = 1500;
