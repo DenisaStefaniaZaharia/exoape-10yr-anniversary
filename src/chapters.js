@@ -121,12 +121,6 @@ gltfLoader.load(
     scene.add(sphereModel);
     sectionMeshes.push(sphereModel);
 
-    //clone sphere for infinite loop
-    // const sphereModelClone = sphereModel.clone();
-    // sphereModelClone.position.x += objectsDistance * totalSections * 1.08;
-    // scene.add(sphereModelClone);
-    // sectionMeshes.push(sphereModelClone);
-
     //Glow light that follows sphere around torus
     const glowLight = new THREE.PointLight(0xfffce8, 2, 5);
     scene.add(glowLight);
@@ -341,7 +335,6 @@ gltfLoader.load("/glb/infinite.glb", (gltf) => {
 const sectionMeshes = [];
 scene.add(torus, sun, torus2, sun2);
 sectionMeshes.push(torus, sun, torus2, sun2);
-
 /**
  * Particles
  */
@@ -486,63 +479,22 @@ composer.addPass(bloomPass);
 let scrollX = window.scrollX;
 let currentSection = 0;
 
-//good scroll before infinit loop
-// window.addEventListener("scroll", () => {
-//   scrollX = window.scrollX;
-//   const newSection = Math.round(scrollX / sizes.width);
+window.addEventListener("scroll", () => {
+  scrollX = window.scrollX;
+  const newSection = Math.round(scrollX / sizes.width);
 
-//   if (newSection !== currentSection) {
-//     currentSection = newSection;
+  if (newSection !== currentSection) {
+    currentSection = newSection;
 
-//     dots.forEach((dot, index) => {
-//       if (index === currentSection) {
-//         dot.classList.add("active");
-//       } else {
-//         dot.classList.remove("active");
-//       }
-//     });
-//   }
-// });
-
-/**
- * Infinite scrolling loop
- */
-// const sectionsContainer = document.querySelector(".scroll-wrapper");
-// const originalSections = document.querySelectorAll(".section");
-
-// // Clone original sections
-// originalSections.forEach((section) => {
-//   const clone = section.cloneNode(true);
-//   sectionsContainer.appendChild(clone);
-// });
-
-// // Update total count after cloning
-// const totalSections = originalSections.length;
-// const sectionWidth = sizes.width;
-// const loopWidth = totalSections * sectionWidth;
-
-// window.addEventListener("scroll", () => {
-//   scrollX = window.scrollX;
-
-//   // Update active dot based on original section index
-//   const newSection = Math.floor((scrollX % loopWidth) / sizes.width);
-//   if (newSection !== currentSection) {
-//     currentSection = newSection;
-//     dots.forEach((dot, index) => {
-//       dot.classList.toggle("active", index === newSection);
-//     });
-//   }
-
-//   // Reset scroll to start if we reach clone end
-//   if (scrollX >= loopWidth * 2 - sectionWidth) {
-//     window.scrollTo({ left: scrollX - loopWidth, behavior: "auto" });
-//   }
-
-//   // Reset scroll to end if we go too far left
-//   if (scrollX <= 0) {
-//     window.scrollTo({ left: scrollX + loopWidth, behavior: "auto" });
-//   }
-// });
+    dots.forEach((dot, index) => {
+      if (index === currentSection) {
+        dot.classList.add("active");
+      } else {
+        dot.classList.remove("active");
+      }
+    });
+  }
+});
 
 window.addEventListener(
   "wheel",
