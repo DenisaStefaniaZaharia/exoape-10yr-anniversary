@@ -148,7 +148,7 @@ window.addEventListener("resize", () => {
  */
 gsap.to(".pre-loader-logo.fill", {
   clipPath: "inset(0% 0 0 0)", // fully revealed
-  duration: 0.8,
+  duration: 1.2,
   ease: "power2.out",
 });
 
@@ -156,7 +156,7 @@ gsap.to(".pre-loader-logo.fill", {
 gsap.to(".preloader", {
   opacity: 0,
   duration: 0.5,
-  delay: 0.3,
+  delay: 1.4,
   onComplete: () => {
     document.querySelector(".preloader").style.display = "none";
   },

@@ -6,6 +6,8 @@ import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const parameters = {
   materialColor: "#ffeded",
@@ -630,4 +632,41 @@ document.addEventListener("mousemove", (e) => {
     duration: 0.2,
     ease: "power2.out",
   });
+});
+
+//Parallax effect title
+document.querySelectorAll(".section-title").forEach((title) => {
+  gsap.to(title, {
+    xPercent: -20, //moves faster toward left
+    ease: "none",
+    scrollTrigger: {
+      trigger: title,
+      start: "left center",
+      end: "right center",
+      scrub: true,
+      horizontal: true,
+      scroller: window,
+    },
+  });
+});
+
+//Next Chapter
+const sections = document.querySelectorAll(".section");
+let currentSectionIndex = 0;
+
+const scrollToSection = (index) => {
+  const target = sections[index];
+  if (target) {
+    window.scrollTo({
+      left: target.offsetLeft,
+      behavior: "smooth",
+    });
+  }
+};
+
+document.getElementById("nextChapterBtn").addEventListener("click", () => {
+  currentSectionIndex++;
+  if (currentSectionIndex < sections.length) {
+    scrollToSection(currentSectionIndex);
+  }
 });

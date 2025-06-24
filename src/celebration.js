@@ -148,16 +148,45 @@ gltfLoader.load("/glb/infinite.glb", (gltf) => {
   infinityGroup.position.copy(infinite.position);
 });
 
-//Ten model
+// //Ten model
+// let tenModel;
+// gltfLoader.load("/glb/sper.glb", (gltf) => {
+//   tenModel = gltf.scene;
+//   tenModel.scale.set(1, 1, 1);
+//   tenModel.rotation.y = Math.PI;
+//   tenModel.position.y = -objectsDistance * 3.8;
+
+//   scene.add(tenModel);
+//   sectionMeshes.push(tenModel);
+//   console.log(tenModel);
+// });
+
+let mixer = null;
 let tenModel;
-gltfLoader.load("/glb/number10.glb", (gltf) => {
+gltfLoader.load("/glb/sper2.glb", (gltf) => {
   tenModel = gltf.scene;
+  mixer = new THREE.AnimationMixer(tenModel);
+
+  gltf.animations.forEach((clip) => {
+    const action = mixer.clipAction(clip);
+    action.play();
+    action.timeScale = 1.5; // 2x faster, default is 1
+  });
+
   tenModel.scale.set(1, 1, 1);
-  tenModel.rotation.y = Math.PI;
+  tenModel.rotation.y = -Math.PI / 2;
+  tenModel.position.x += 1;
+
   tenModel.position.y = -objectsDistance * 3.8;
 
-  scene.add(tenModel);
+  // tenModel.traverse((child) => {
+  //   if (child.isMesh) {
+  //     // Rotate the plane more
+  //     child.rotation.z += Math.PI / 2; // ↻ rotate 45° more
+  //   }
+  // });
   sectionMeshes.push(tenModel);
+  scene.add(tenModel);
 });
 
 const sectionMeshes = [];
@@ -269,6 +298,11 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
   const deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime;
+
+  //Update mixer
+  if (mixer != null) {
+    mixer.update(deltaTime);
+  }
 
   //3 suns celebration section
   lightArray.forEach(({ mesh, light, offset }) => {
