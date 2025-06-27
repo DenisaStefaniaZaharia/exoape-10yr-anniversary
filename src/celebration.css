@@ -17,7 +17,7 @@ html {
 
 /* Top Bar */
 .top-bar {
-  position: absolute;
+  position: fixed;
   width: 1320px;
   height: 40px;
   left: 60px;
@@ -211,4 +211,72 @@ html {
   font-size: 225.094px;
   letter-spacing: -7.81575px;
   color: #e0ccbb;
+}
+
+@media (max-width: 1024px) {
+  .top-bar {
+    width: 90%;
+    left: 5%;
+    top: 20px;
+    flex-direction: row;
+  }
+
+  .container {
+    margin: 20vw 5vw 0 5vw;
+  }
+
+  .title {
+    line-height: 120px;
+    font-size: 20vw;
+  }
+
+  .title-line {
+    font-size: 20vw;
+  }
+  .next-chapter-link {
+    font-size: 80px;
+    letter-spacing: -3px;
+  }
+
+  .hero .intro,
+  .anniversaryParty .intro {
+    font-size: 14px;
+    line-height: 16px;
+    width: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo img {
+    height: 20px;
+  }
+
+  .close-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .title {
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .title-line {
+    font-size: 20vw;
+  }
+
+  .label .text {
+    font-size: 9px;
+  }
+
+  .icon {
+    width: 9px;
+    height: 9px;
+  }
+  .custom-cursor {
+    display: none;
+  }
+  .nextContainer {
+    margin-top: 80px;
+  }
 }

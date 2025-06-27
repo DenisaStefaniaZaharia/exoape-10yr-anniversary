@@ -43,6 +43,7 @@ html {
 .milestonesChapter {
   left: 0;
   position: absolute;
+  right: 0;
   top: 0;
   z-index: 1;
   font-family: "TWK Lausanne";
@@ -55,10 +56,6 @@ html {
   margin: 13vw 8vw 0 8vw;
   position: relative;
   z-index: 3;
-}
-
-.intro {
-  opacity: 0.8;
 }
 
 .title {
@@ -148,9 +145,9 @@ html {
 }
 
 .ottoVideo video {
-  width: 993px;
-  height: 560px;
-  align-self: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 
 /*Two*/
@@ -170,9 +167,6 @@ html {
   font-size: 30px;
   line-height: 40px;
   letter-spacing: -0.1px;
-  /* display: flex;
-  gap: 10px;
-  align-items: flex-start; */
 }
 
 .two .media1 {
@@ -345,27 +339,136 @@ html {
 }
 
 @media (max-width: 1024px) {
+  .top-bar {
+    width: 90%;
+    left: 5%;
+    top: 20px;
+    flex-direction: row;
+  }
+
   .container {
-    margin: 20vh 10vw 0 10vw;
+    margin: 20vw 5vw 0 5vw;
+  }
+
+  .title {
+    line-height: 120px;
+    font-size: 20vw;
+  }
+
+  .title-line {
+    font-size: 20vw;
+  }
+
+  .ottoProject .container,
+  .two .container,
+  .three .container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* fewer columns for mobile */
+    gap: 16px;
+  }
+
+  .ottoProject .label,
+  .three .label {
+    grid-column: 1 / 7;
+    grid-row: 1;
+  }
+
+  .ottoProject .intro,
+  .three .intro {
+    grid-column: 1 / 7;
+    grid-row: 1;
+    margin-top: 20px;
+  }
+
+  .ottoProject .intro,
+  .three .intro,
+  .two .intro {
+    width: 100%;
+    font-size: 12px;
+    margin-bottom: 20px;
+    line-height: 16px;
+  }
+
+  .ottoProject .info,
+  .two .info,
+  .three .info {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .ottoProject .info {
+    width: 90%;
+    margin: 20px 0;
+    margin-left: 40px;
+  }
+
+  .two .info {
+    width: 60%;
+    margin-top: 20px;
+  }
+
+  .three .info {
+    width: 80%;
+    margin: 20px 0;
+  }
+
+  .next-chapter-link {
+    font-size: 80px;
+    letter-spacing: -3px;
   }
 }
 
-@media (max-width: 768px) {
-  .top-bar {
-    width: 100%;
-    left: 0;
-    padding: 0 16px;
-    box-sizing: border-box;
+@media (max-width: 600px) {
+  .logo img {
+    height: 20px;
   }
 
   .close-button {
-    width: 32px;
-    height: 32px;
-    border-width: 1px;
-    opacity: 0.6;
+    width: 30px;
+    height: 30px;
   }
 
-  .logo img {
-    height: 20px;
+  .title {
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .title-line {
+    font-size: 20vw;
+  }
+
+  .label .text {
+    font-size: 9px;
+  }
+
+  .icon {
+    width: 9px;
+    height: 9px;
+  }
+
+  .ottoProject .intro,
+  .two .intro,
+  .three .intro {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .custom-cursor {
+    display: none;
+  }
+
+  .ottoAward img {
+    width: 180px;
+    height: auto;
+  }
+
+  .media1 img {
+    width: 50%;
+    height: auto;
+  }
+  .mediaMonkey img {
+    width: 50%;
+    height: auto;
+    margin-left: 10%;
+    margin-top: -10%;
   }
 }

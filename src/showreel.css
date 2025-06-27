@@ -11,7 +11,7 @@ html {
 
 /* Top Bar */
 .top-bar {
-  position: absolute;
+  position: fixed;
   width: 1320px;
   height: 40px;
   left: 60px;
@@ -41,6 +41,7 @@ html {
 /* Header */
 
 .showreelChapter {
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -87,9 +88,6 @@ html {
 .next-chapter .nextContainer {
   text-align: center;
 }
-/* .next-chapter {
-  height: 100vh;
-} */
 
 .next-chapter .label {
   display: flex;
@@ -142,7 +140,68 @@ html {
 }
 
 .showreel-video {
-  width: 996px;
-  height: 560px;
-  align-self: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .top-bar {
+    width: 90%;
+    left: 5%;
+    top: 20px;
+    flex-direction: row;
+  }
+
+  .container {
+    margin: 20vw 5vw 0 5vw;
+  }
+
+  .title {
+    line-height: 120px;
+    font-size: 20vw;
+  }
+
+  .title-line {
+    font-size: 20vw;
+  }
+  .next-chapter-link {
+    font-size: 80px;
+    letter-spacing: -3px;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo img {
+    height: 20px;
+  }
+
+  .close-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .title {
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .title-line {
+    font-size: 20vw;
+  }
+
+  .label .text {
+    font-size: 9px;
+  }
+
+  .icon {
+    width: 9px;
+    height: 9px;
+  }
+  .custom-cursor {
+    display: none;
+  }
+  .nextContainer {
+    margin-top: 80px;
+  }
 }

@@ -396,7 +396,7 @@ html {
 
   .intro,
   .finding-name .intro,
-  .origin .intro {
+  .intro {
     width: 100%;
     font-size: 1rem;
     line-height: 1.5;
@@ -446,8 +446,13 @@ html {
 
 /* For mobile phones */
 @media (max-width: 600px) {
-  .label {
-    font-size: 0.75rem;
+  .label .text {
+    font-size: 9px;
+  }
+
+  .icon {
+    width: 9px;
+    height: 9px;
   }
 
   .intro {
@@ -465,7 +470,7 @@ html {
     max-width: 100%;
     object-fit: cover;
     display: block;
-    margin: 2rem auto 0 auto; /* center the image horizontally with some spacing above */
+    margin: 2rem auto 0 auto;
   }
 
   .hero .title-line {
@@ -489,8 +494,6 @@ html {
   .hero .container {
     align-items: center;
   }
-}
-@media (max-width: 768px) {
   .origin .title-line {
     font-size: 20vw;
   }
