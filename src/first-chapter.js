@@ -376,3 +376,13 @@ const tick = () => {
 };
 
 tick();
+
+const params = new URLSearchParams(window.location.search);
+const sectionId = params.get("from");
+
+const closeBtn = document.getElementById("closeBtn");
+if (sectionId) {
+  closeBtn.href = `chapters.html#${sectionId}`;
+} else {
+  closeBtn.href = "chapters.html";
+}

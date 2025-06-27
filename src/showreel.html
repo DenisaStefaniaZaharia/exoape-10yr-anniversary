@@ -15,7 +15,7 @@
       <div class="logo">
         <img src="/images/logo.svg" alt="Logo" />
       </div>
-      <a href="chapters.html" class="close-button">
+      <a href="#" id="closeBtn" class="close-button cta-inline">
         <img src="/images/close.svg" alt="Close" />
       </a>
     </div>
@@ -75,6 +75,16 @@
           video.play();
         });
       });
+
+      const params = new URLSearchParams(window.location.search);
+      const sectionId = params.get("from");
+
+      const closeBtn = document.getElementById("closeBtn");
+      if (sectionId) {
+        closeBtn.href = `chapters.html#${sectionId}`;
+      } else {
+        closeBtn.href = "chapters.html";
+      }
     </script>
   </body>
 </html>
