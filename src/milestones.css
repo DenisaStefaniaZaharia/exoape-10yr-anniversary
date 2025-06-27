@@ -11,7 +11,7 @@ html {
 
 /* Top Bar */
 .top-bar {
-  position: absolute;
+  position: fixed;
   width: 1320px;
   height: 40px;
   left: 60px;
@@ -43,7 +43,6 @@ html {
 .milestonesChapter {
   left: 0;
   position: absolute;
-  right: 0;
   top: 0;
   z-index: 1;
   font-family: "TWK Lausanne";
@@ -340,8 +339,33 @@ html {
 #webgl {
   display: flex;
   flex-direction: column;
-  /* margin: 13vw 8vw 0 8vw; */
   position: relative;
   z-index: 3;
   pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    margin: 20vh 10vw 0 10vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    width: 100%;
+    left: 0;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .close-button {
+    width: 32px;
+    height: 32px;
+    border-width: 1px;
+    opacity: 0.6;
+  }
+
+  .logo img {
+    height: 20px;
+  }
 }

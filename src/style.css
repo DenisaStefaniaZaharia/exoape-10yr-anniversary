@@ -113,9 +113,7 @@ body {
 
 .intro-text h1 {
   width: 965.94px;
-  height: 201px;
-  left: calc(50% - 965.94px / 2 - 0.03px);
-  top: calc(50% - 201px / 2 + 0.5px);
+  /* height: 201px; */
   font-family: "Lausanne";
   font-style: normal;
   font-weight: 350;
@@ -200,4 +198,96 @@ body {
 
 .explore-chapter.visible {
   opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .logo {
+    width: 70px;
+    top: 5%;
+  }
+
+  .intro-text h1 {
+    width: 80vw;
+    font-size: 70px;
+    line-height: 80px;
+  }
+
+  .intro-text p {
+    width: 70vw;
+    font-size: 16px;
+    margin-top: 100px;
+  }
+
+  .bottom-bar {
+    width: 90vw;
+    left: 5vw;
+    top: auto;
+    bottom: 40px;
+    height: auto;
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 60px;
+    top: 4%;
+  }
+
+  .intro-text h1 {
+    font-size: 40px;
+    line-height: 60px;
+    letter-spacing: -2px;
+  }
+
+  .intro-text p {
+    position: absolute;
+    width: 80vw;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+  }
+
+  .sound-button {
+    width: 35px;
+    height: 35px;
+  }
+
+  .explore-chapter a {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 50px;
+    top: 3%;
+  }
+
+  .intro-text h1 {
+    font-size: 30px;
+    line-height: 42px;
+  }
+
+  .intro-text p {
+    font-size: 12px;
+    width: 85vw;
+    margin-top: 80px;
+  }
+
+  .bottom-bar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .sound-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .explore-chapter a {
+    font-size: 11px;
+  }
 }
