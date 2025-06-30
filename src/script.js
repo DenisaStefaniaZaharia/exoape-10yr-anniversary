@@ -122,6 +122,23 @@ const handleWheel = (event) => {
 document.addEventListener("wheel", handleWheel);
 
 /**
+ * Touch Scroll Support (Mobile)
+ */
+let touchStartY = 0;
+
+document.addEventListener("touchstart", (e) => {
+  touchStartY = e.touches[0].clientY;
+});
+
+document.addEventListener("touchmove", (e) => {
+  const touchEndY = e.touches[0].clientY;
+  const deltaY = touchStartY - touchEndY;
+
+  handleWheel({ deltaY });
+  touchStartY = touchEndY;
+});
+
+/**
  * Sizes
  */
 const sizes = {
