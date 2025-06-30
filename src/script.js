@@ -128,7 +128,7 @@ let touchStartY = 0;
 
 document.addEventListener("touchstart", (e) => {
   touchStartY = e.touches[0].clientY;
-});
+}); //When the user touches the screen, record Y position (starting point of swipe)
 
 document.addEventListener("touchmove", (e) => {
   const touchEndY = e.touches[0].clientY;

@@ -252,9 +252,9 @@ body {
     gap: 1rem;
   }
 
-  /* .link-chapter {
+  .link-chapter {
     width: auto;
-  } */
+  }
 }
 
 @media (max-width: 768px) {

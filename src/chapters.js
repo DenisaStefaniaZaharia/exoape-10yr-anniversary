@@ -515,28 +515,25 @@ window.addEventListener(
 );
 
 /**
- *
- * Wheel
+ * Mobile swipe support (horizontal)
  */
-// const handleWheel = (event) => {
-//   //   event.preventDefault(); // Prevent normal vertical scrolling
-//   state.scroll.position -= event.deltaY * 0.05;
-// };
+let touchStartX = 0;
 
-// document.addEventListener("wheel", handleWheel);
+document.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+});
 
-// // Handle resize
-// const handleResize = () => {
-//   state.dimensions.width = window.innerWidth;
-//   state.dimensions.height = window.innerHeight;
+document.addEventListener("touchmove", (e) => {
+  const touchEndX = e.touches[0].clientX;
+  const deltaX = touchStartX - touchEndX;
 
-//   // particleSystems.forEach(({ camera, renderer }) => {
-//   //   camera.aspect = state.dimensions.width / state.dimensions.height;
-//   //   camera.updateProjectionMatrix();
-//   //   renderer.setSize(state.dimensions.width, state.dimensions.height);
-//   // });
-// };
-// window.addEventListener("resize", handleResize);
+  window.scrollBy({
+    left: deltaX,
+    behavior: "auto",
+  });
+
+  touchStartX = touchEndX;
+});
 
 /**
  * Cursor
