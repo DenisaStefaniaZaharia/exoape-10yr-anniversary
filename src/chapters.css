@@ -243,11 +243,6 @@ body {
     height: auto;
   }
 
-  .top-bar {
-    width: 90vw;
-    left: 5vw;
-  }
-
   .bottom-bar {
     width: 90vw;
     left: 5vw;
@@ -257,9 +252,9 @@ body {
     gap: 1rem;
   }
 
-  .link-chapter {
+  /* .link-chapter {
     width: auto;
-  }
+  } */
 }
 
 @media (max-width: 768px) {
@@ -275,7 +270,7 @@ body {
   }
 
   .custom-cursor {
-    display: none; /* Hide cursor on touch devices */
+    display: none;
   }
 }
 
@@ -301,9 +296,5 @@ body {
   .bottom-bar {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .next-chapter a {
-    font-size: 12px;
   }
 }

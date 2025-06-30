@@ -386,12 +386,12 @@ html {
   }
 
   .title {
-    line-height: 1.1;
+    line-height: 120px;
     margin: 5vh 0;
   }
 
   .title-line {
-    font-size: 10vw;
+    font-size: 20vw;
   }
 
   .intro,
@@ -440,7 +440,8 @@ html {
   }
 
   .next-chapter-link {
-    font-size: 10vw;
+    font-size: 80px;
+    letter-spacing: -3px;
   }
 }
 
